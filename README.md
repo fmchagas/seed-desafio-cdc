@@ -1,5 +1,33 @@
-# Faça um fork desse repositório
+# API casa do código
+  Neste desafio preciso desenvolver uma API para suportar parte do funcionamento da casa do código.
+  A ideia é trabalhar o design do código, criando código que seja suficiente para a funcionalidade e questionar de maneira propositiva os padrões já estabelecidos na minha mente e no mercado.
 
-Este é um repositório vazio de propósito. A ideia é que você faça um fork para que eu, Alberto, possa usar o github para ter a chance de olhar vários dos códigos produzido por você e seus(as) colegas da Jornada Dev Eficiente :). 
+## Começando
+Para executar o projeto, será necessário instalar os seguintes programas:
 
-Durante cada uma das seis semanas eu vou pegar código por amostragem e analisar. Feito isso, vou criar um vídeo anonimizando a pessoa que é dona do código, com as minhas observações e postar isso como material de suporte da funcionalidade :). 
+- [Java 11+](https://openjdk.java.net/projects/jdk/11/)
+- [Maven 3+](https://maven.apache.org/download.cgi)
+- [Postman](https://www.postman.com/downloads/) ou [Imsominia](https://insomnia.rest/download)
+
+## Observação
+* Projeto usa ecossistema Spring
+* H2 como banco de dados em arquivo
+
+## Desenvolvimento
+
+* Para iniciar o desenvolvimento Tenha uma IDE(eclipse com STS) e clone o projeto do GitHub num diretório:
+
+```shell
+cd "<seu diretório(workspace)>"
+git clone https://github.com/fmchagas/seed-desafio-cdc.git
+```
+
+* Rode a aplicação
+
+```shell
+cd "<diretório raiz da aplicação>"
+./mvnw spring-boot:run
+```
+
+faça uma requisição para:
+http://localhost:8080/autores
