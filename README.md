@@ -30,4 +30,12 @@ cd "<diretório raiz da aplicação>"
 ```
 
 faça uma requisição para:
-http://localhost:8080/autores
+http://localhost:8080/api/v1/autores
+
+```shell
+	{
+		"nome":"Fernando",
+		"email":"fer@provedor.com",
+		"descricao":"virado no Jiraya para se tornar dev eficiente"
+	}
+```
