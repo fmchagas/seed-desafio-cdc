@@ -18,15 +18,22 @@ Para executar o projeto, será necessário instalar os seguintes programas:
 * Para iniciar o desenvolvimento Tenha uma IDE(eclipse com STS) e clone o projeto do GitHub num diretório:
 
 ```shell
-cd "<seu diretório(workspace)>"
-git clone https://github.com/fmchagas/seed-desafio-cdc.git
+	cd "<seu diretório(workspace)>"
+	git clone https://github.com/fmchagas/seed-desafio-cdc.git
 ```
 
 * Rode a aplicação
 
 ```shell
-cd "<diretório raiz da aplicação>"
-./mvnw spring-boot:run
+	cd "<diretório raiz da aplicação>"
+    ./mvnw spring-boot:start
+```
+
+* Pare a aplicação
+
+```shell
+    ctrl + c
+    ./mvnw spring-boot:stop
 ```
 
 faça uma requisição para:
