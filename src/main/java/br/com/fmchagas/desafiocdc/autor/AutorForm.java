@@ -1,77 +1,37 @@
 package br.com.fmchagas.desafiocdc.autor;
 
-import java.time.LocalDateTime;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import br.com.fmchagas.desafiocdc.validation.UniqueValue;
+
+//1
 public class AutorForm {
-
-	private Long id;
 	
-	@NotEmpty(message = "Não pode ser vazio")
-	private String nome;
+	@NotEmpty private String nome;
 	
-	@Email @NotEmpty(message = "Não pode ser vazio")
-	private String email;
+	@UniqueValue(domainClass = Autor.class, fieldName = "email")
+	@Email @NotEmpty private String email;
 	
-	@NotEmpty(message = "Não pode ser vazio")
-	@Size(max = 400, message = "Deve ter no maximo {max} caracteres")
-	private String descricao;
+	@NotEmpty @Size(max = 400) private String descricao;
 	
-	private LocalDateTime criadoEm;
+	
 
-
-	public Autor toModel() {
-		return new Autor(nome, email, descricao);
-	}
-
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-	public String getNome() {
-		return nome;
-	}
-
-
-	public void setNome(String nome) {
+	public AutorForm(@NotEmpty String nome, @Email @NotEmpty String email,
+			@NotEmpty @Size(max = 400) String descricao) {
+		super();
 		this.nome = nome;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
 		this.email = email;
-	}
-
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-
-	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 	
-	public LocalDateTime getCriadoEm() {
-		return criadoEm;
+	//1
+	public Autor toModel() {
+		return new Autor(nome, email, descricao);
 	}
 	
-	public void setCriadoEm(LocalDateTime criadoEm) {
-		this.criadoEm = criadoEm;
+	public String getEmail() {
+		return email;
 	}
 }

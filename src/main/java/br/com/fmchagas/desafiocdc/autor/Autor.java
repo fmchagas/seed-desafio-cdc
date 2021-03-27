@@ -18,20 +18,23 @@ public class Autor {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotEmpty(message = "Não pode ser vazio")
+	@NotEmpty
 	private String nome;
 	
-	@Email @NotEmpty(message = "Não pode ser vazio")
+	@Email @NotEmpty
 	private String email;
 	
-	@NotEmpty(message = "Não pode ser vazio")
-	@Size(max = 400, message = "Deve ter no maximo {max} caracteres")
+	@NotEmpty
+	@Size(max = 400)
+	@Column(length = 400)
 	private String descricao;
 	
 	@NotNull
 	@Column(name = "criado_em")
 	private LocalDateTime criadoEm = LocalDateTime.now();
 	
+	@Deprecated
+	public Autor(){}
 	
 	public Autor(String nome, String email, String descricao) {
 		this.nome = nome;
@@ -39,12 +42,13 @@ public class Autor {
 		this.descricao = descricao;
 	}
 	
-	public Long getId() {
-		return id;
+	public String getNome() {
+		return nome;
 	}
-	
-	public LocalDateTime getCriadoEm() {
-		return criadoEm;
+
+	@Override
+	public String toString() {
+		return "Autor {nome=" + nome + ", email=" + email + ", descricao=" + descricao + "}";
 	}
 
 	@Override
