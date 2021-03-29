@@ -33,7 +33,7 @@ public class Livro {
 	private @NotNull @Min(100) Integer numeroPagina;
 	private @NotEmpty String isbn;
 	
-	@Column(name = "data_ublicacao")
+	@Column(name = "data_publicacao")
 	@Future
 	private @NotNull LocalDate dataPublicacao;
 	
