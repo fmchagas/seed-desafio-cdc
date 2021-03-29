@@ -26,10 +26,11 @@ Para executar o projeto, será necessário instalar os seguintes programas:
 
 ```shell
 	cd "<diretório raiz da aplicação>"
-    ./mvnw spring-boot:start
+    ./mvnw spring-boot:run
+    ou ./mvnw spring-boot:start
 ```
 
-* Pare a aplicação
+* Pare a aplicação se usar start
 
 ```shell
     ctrl + c
