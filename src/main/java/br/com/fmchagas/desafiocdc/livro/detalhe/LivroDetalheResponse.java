@@ -1,11 +1,7 @@
 package br.com.fmchagas.desafiocdc.livro.detalhe;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 import br.com.fmchagas.desafiocdc.livro.Livro;
 
