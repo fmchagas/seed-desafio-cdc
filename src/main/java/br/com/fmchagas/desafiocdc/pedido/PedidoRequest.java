@@ -1,5 +1,6 @@
 package br.com.fmchagas.desafiocdc.pedido;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -45,10 +46,14 @@ public class PedidoRequest {
 	
 	@NotBlank
 	private String telefone;
+	
+	@Valid
+	private CarinhoRequest carrinho;
 
 	public PedidoRequest(@Email @NotBlank String email, @NotBlank String nome, @NotBlank String sobrenome,
 			@NotBlank String documento, @NotBlank String endereco, @NotBlank String complemento,
-			@NotBlank String cidade, @NotNull Long paisId, Long ufId, @NotBlank String cep, @NotBlank String telefone) {
+			@NotBlank String cidade, @NotNull Long paisId, Long ufId, @NotBlank String cep,
+			@NotBlank String telefone, @Valid CarinhoRequest carrinho) {
 		super();
 		this.email = email;
 		this.nome = nome;
@@ -61,6 +66,7 @@ public class PedidoRequest {
 		this.ufId = ufId;
 		this.cep = cep;
 		this.telefone = telefone;
+		this.carrinho = carrinho;
 	}
 
 	public boolean documentoValido() {
@@ -74,6 +80,10 @@ public class PedidoRequest {
 		
 		return cpfValidator.isValid(documento, null) || cnpjValidator.isValid(documento, null);
 	}
+	
+	public CarinhoRequest getCarrinho() {
+		return carrinho;
+	}
 
 	public Long getPaisId() {
 		return paisId;
@@ -86,12 +96,12 @@ public class PedidoRequest {
 	public Long getUfId() {
 		return ufId;
 	}
-	
 
 	@Override
 	public String toString() {
-		return "PagamentoRequest [email=" + email + ", nome=" + nome + ", sobrenome=" + sobrenome + ", documento="
+		return "PedidoRequest [email=" + email + ", nome=" + nome + ", sobrenome=" + sobrenome + ", documento="
 				+ documento + ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade
-				+ ", paisId=" + paisId + ", ufId=" + ufId + ", cep=" + cep + ", telefone=" + telefone + "]";
+				+ ", paisId=" + paisId + ", ufId=" + ufId + ", cep=" + cep + ", telefone=" + telefone + ", carrinho="
+				+ carrinho + "]";
 	}
 }
