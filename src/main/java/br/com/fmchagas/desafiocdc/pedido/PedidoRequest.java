@@ -1,4 +1,4 @@
-package br.com.fmchagas.desafiocdc.pedido.pagamento;
+package br.com.fmchagas.desafiocdc.pedido;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -12,7 +12,7 @@ import br.com.fmchagas.desafiocdc.enderecamento.pais.Pais;
 import br.com.fmchagas.desafiocdc.enderecamento.uf.UnidadeFederativa;
 import br.com.fmchagas.desafiocdc.validation.ExistsId;
 
-public class PagamentoRequest {
+public class PedidoRequest {
 	@Email @NotBlank
 	private String email;
 	
@@ -46,7 +46,7 @@ public class PagamentoRequest {
 	@NotBlank
 	private String telefone;
 
-	public PagamentoRequest(@Email @NotBlank String email, @NotBlank String nome, @NotBlank String sobrenome,
+	public PedidoRequest(@Email @NotBlank String email, @NotBlank String nome, @NotBlank String sobrenome,
 			@NotBlank String documento, @NotBlank String endereco, @NotBlank String complemento,
 			@NotBlank String cidade, @NotNull Long paisId, Long ufId, @NotBlank String cep, @NotBlank String telefone) {
 		super();

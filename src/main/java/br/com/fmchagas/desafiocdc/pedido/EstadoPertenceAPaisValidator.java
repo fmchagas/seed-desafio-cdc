@@ -1,4 +1,4 @@
-package br.com.fmchagas.desafiocdc.pedido.pagamento;
+package br.com.fmchagas.desafiocdc.pedido;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,7 +19,7 @@ public class EstadoPertenceAPaisValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return PagamentoRequest.class.isAssignableFrom(clazz);
+		return PedidoRequest.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class EstadoPertenceAPaisValidator implements Validator {
 		if (errors.hasErrors()) return;
 		
 		//1
-		PagamentoRequest request = (PagamentoRequest) target;
+		PedidoRequest request = (PedidoRequest) target;
 		
 		//1
 		Pais pais = manager.find(Pais.class, request.getPaisId());
