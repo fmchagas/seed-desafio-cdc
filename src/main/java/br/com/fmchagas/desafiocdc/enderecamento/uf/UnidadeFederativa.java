@@ -43,4 +43,8 @@ public class UnidadeFederativa {
 	public Pais getPais() {
 		return pais;
 	}
+
+	public boolean pertenceAPais(Pais pais) {
+		return this.pais.equals(pais);
+	}
 }
