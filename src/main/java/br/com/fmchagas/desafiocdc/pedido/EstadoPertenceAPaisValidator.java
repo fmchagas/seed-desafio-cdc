@@ -31,10 +31,10 @@ public class EstadoPertenceAPaisValidator implements Validator {
 		PedidoRequest request = (PedidoRequest) target;
 		
 		//1
-		Pais pais = manager.find(Pais.class, request.getPaisId());
-		
-		//1
-		if (request.getUfId() != null) {
+		if (request.temUf()) {
+			//1
+			Pais pais = manager.find(Pais.class, request.getPaisId());
+			
 			//1
 			UnidadeFederativa uf = manager.find(UnidadeFederativa.class, request.getUfId());
 			

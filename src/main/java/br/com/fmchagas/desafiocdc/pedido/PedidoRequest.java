@@ -1,5 +1,6 @@
 package br.com.fmchagas.desafiocdc.pedido;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -13,6 +14,7 @@ import br.com.fmchagas.desafiocdc.enderecamento.pais.Pais;
 import br.com.fmchagas.desafiocdc.enderecamento.uf.UnidadeFederativa;
 import br.com.fmchagas.desafiocdc.validation.ExistsId;
 
+//total carga: 4
 public class PedidoRequest {
 	@Email @NotBlank
 	private String email;
@@ -37,7 +39,7 @@ public class PedidoRequest {
 	
 	@NotNull @ExistsId(domainClass = Pais.class, fieldName = "id")
 	private Long paisId;
-	
+	//1
 	@ExistsId(domainClass = UnidadeFederativa.class, fieldName = "id")
 	private Long ufId;
 	
@@ -47,6 +49,7 @@ public class PedidoRequest {
 	@NotBlank
 	private String telefone;
 	
+	//1
 	@Valid
 	private CarinhoRequest carrinho;
 
@@ -81,6 +84,21 @@ public class PedidoRequest {
 		return cpfValidator.isValid(documento, null) || cnpjValidator.isValid(documento, null);
 	}
 	
+	//1
+	public Pedido toModel(EntityManager manager) {
+		//1
+		@NotNull Pais pais = manager.find(Pais.class, paisId);
+		
+		Pedido pedido = new Pedido(email,nome,sobrenome,documento,endereco,complemento,telefone,cep,pais);
+		
+		//1
+		if(ufId != null) {
+			pedido.setUf(manager.find(UnidadeFederativa.class, ufId));
+		}
+		
+		return pedido;
+	}
+	
 	public CarinhoRequest getCarrinho() {
 		return carrinho;
 	}
@@ -103,5 +121,9 @@ public class PedidoRequest {
 				+ documento + ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade
 				+ ", paisId=" + paisId + ", ufId=" + ufId + ", cep=" + cep + ", telefone=" + telefone + ", carrinho="
 				+ carrinho + "]";
+	}
+
+	public boolean temUf() {
+		return ufId != null;
 	}
 }
