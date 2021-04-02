@@ -19,22 +19,18 @@ public class CompraController {
 	private EntityManager manager;
 	
 	//1
-	private VerificaDocumentoCpfOuCnpjValidator verificaDocumentoCpfOuCnpjValidator;
-	//1
 	private UfPertenceAPaisValidator estadoPertenceAPaisValidator;
 	//1
 	private PaisTemUfValidator paisTemUfValidator;
 	
-	public CompraController(VerificaDocumentoCpfOuCnpjValidator verificaDocumentoCpfOuCnpjValidator,
-			UfPertenceAPaisValidator estadoPertenceAPaisValidator, PaisTemUfValidator paisTemUfValidator) {
-		this.verificaDocumentoCpfOuCnpjValidator = verificaDocumentoCpfOuCnpjValidator;
+	public CompraController(UfPertenceAPaisValidator estadoPertenceAPaisValidator, PaisTemUfValidator paisTemUfValidator) {
 		this.estadoPertenceAPaisValidator = estadoPertenceAPaisValidator;
 		this.paisTemUfValidator = paisTemUfValidator;
 	}
 	
 	@InitBinder
 	public void init(WebDataBinder binder) {
-		binder.addValidators(verificaDocumentoCpfOuCnpjValidator, estadoPertenceAPaisValidator, paisTemUfValidator);
+		binder.addValidators(estadoPertenceAPaisValidator, paisTemUfValidator);
 	}
 	
 	@PostMapping

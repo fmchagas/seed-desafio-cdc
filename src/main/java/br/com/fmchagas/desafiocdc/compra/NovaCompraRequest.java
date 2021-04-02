@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import br.com.fmchagas.desafiocdc.compra.pedido.NovoPedidoRequest;
 import br.com.fmchagas.desafiocdc.enderecamento.pais.Pais;
 import br.com.fmchagas.desafiocdc.enderecamento.uf.UnidadeFederativa;
+import br.com.fmchagas.desafiocdc.validation.CpfOrCnpj;
 import br.com.fmchagas.desafiocdc.validation.ExistsId;
 
 //total carga: 4
@@ -26,7 +27,7 @@ public class NovaCompraRequest {
 	@NotBlank
 	private String sobrenome;
 	
-	@NotBlank
+	@NotBlank @CpfOrCnpj
 	private String documento;
 	
 	@NotBlank
