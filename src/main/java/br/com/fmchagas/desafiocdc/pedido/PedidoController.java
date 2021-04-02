@@ -13,26 +13,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/pedidos")
-//total carga: 4
+//total carga: 5
 public class PedidoController {
 	@PersistenceContext
 	private EntityManager manager;
 	
 	//1
 	private VerificaDocumentoCpfOuCnpjValidator verificaDocumentoCpfOuCnpjValidator;
-	
 	//1
-	private EstadoPertenceAPaisValidator estadoPertenceAPaisValidator;
+	private UfPertenceAPaisValidator estadoPertenceAPaisValidator;
+	//1
+	private PaisTemUfValidator paisTemUfValidator;
 	
 	public PedidoController(VerificaDocumentoCpfOuCnpjValidator verificaDocumentoCpfOuCnpjValidator,
-			EstadoPertenceAPaisValidator estadoPertenceAPaisValidator) {
+			UfPertenceAPaisValidator estadoPertenceAPaisValidator, PaisTemUfValidator paisTemUfValidator) {
 		this.verificaDocumentoCpfOuCnpjValidator = verificaDocumentoCpfOuCnpjValidator;
 		this.estadoPertenceAPaisValidator = estadoPertenceAPaisValidator;
+		this.paisTemUfValidator = paisTemUfValidator;
 	}
 	
 	@InitBinder
 	public void init(WebDataBinder binder) {
-		binder.addValidators(verificaDocumentoCpfOuCnpjValidator, estadoPertenceAPaisValidator);
+		binder.addValidators(verificaDocumentoCpfOuCnpjValidator, estadoPertenceAPaisValidator, paisTemUfValidator);
 	}
 	
 	@PostMapping
