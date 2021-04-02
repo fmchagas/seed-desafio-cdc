@@ -29,7 +29,7 @@ public class PaisTemUfValidator implements Validator{
 		//1
 		PedidoRequest request = (PedidoRequest) target;
 		
-		Query query = manager.createQuery("select 1 from br.com.fmchagas.desafiocdc.enderecamento.uf.UnidadeFederativa where pais_id=:id");
+		Query query = manager.createQuery("select 1 from br.com.fmchagas.desafiocdc.enderecamento.uf.UnidadeFederativa where pais_id = :id");
 		query.setParameter("id", request.getPaisId());
 		
 		@SuppressWarnings("unchecked")
@@ -37,7 +37,7 @@ public class PaisTemUfValidator implements Validator{
 		
 		//1
 		if(!request.temUf() & !lista.isEmpty())
-			errors.reject("ufId", null, "este pais tem unidade federativa selecione uma");
+			errors.reject("ufId", null, "este país tem unidade federativa. Selecione uma!");
 	}
 
 }
