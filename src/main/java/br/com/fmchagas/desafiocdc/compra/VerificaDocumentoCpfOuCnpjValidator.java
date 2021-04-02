@@ -1,4 +1,4 @@
-package br.com.fmchagas.desafiocdc.pedido;
+package br.com.fmchagas.desafiocdc.compra;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -10,7 +10,7 @@ public class VerificaDocumentoCpfOuCnpjValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return PedidoRequest.class.isAssignableFrom(clazz);
+		return NovaCompraRequest.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class VerificaDocumentoCpfOuCnpjValidator implements Validator {
 		if(errors.hasErrors()) return;
 		
 		//1
-		PedidoRequest request = (PedidoRequest) target;
+		NovaCompraRequest request = (NovaCompraRequest) target;
 		
 		//1
 		if(!request.documentoValido()) {

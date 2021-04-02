@@ -1,5 +1,8 @@
-package br.com.fmchagas.desafiocdc.pedido;
+package br.com.fmchagas.desafiocdc.compra;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -12,8 +15,10 @@ import br.com.fmchagas.desafiocdc.enderecamento.pais.Pais;
 import br.com.fmchagas.desafiocdc.enderecamento.uf.UnidadeFederativa;
 
 //Total carga: 2
-public class Pedido {
-
+public class Compra {
+	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private @Id Long id;
 	private @Email @NotBlank String email;
 	private @NotBlank String nome;
 	private @NotBlank String sobrenome;
@@ -22,14 +27,14 @@ public class Pedido {
 	private @NotBlank String complemento;
 	private @NotBlank String telefone;
 	private @NotBlank String cep;
-	//1
-	@ManyToOne
+	
+	@ManyToOne //1
 	private @NotNull Pais pais;
-	//1
-	@ManyToOne
+	
+	@ManyToOne //1
 	private UnidadeFederativa uf;
 
-	public Pedido(@Email @NotBlank String email, @NotBlank String nome, @NotBlank String sobrenome,
+	public Compra(@Email @NotBlank String email, @NotBlank String nome, @NotBlank String sobrenome,
 			@NotBlank String documento, @NotBlank String endereco, @NotBlank String complemento,
 			@NotBlank String telefone, @NotBlank String cep, @NotNull Pais pais) {
 				this.email = email;
@@ -46,13 +51,14 @@ public class Pedido {
 	public void setUf(@NotNull @Valid UnidadeFederativa uf) {
 		Assert.notNull(pais, "ops, não podemos associar uma unidade federativa enquanto o país for nulo");
 		Assert.isTrue(uf.pertenceAPais(pais), "Está unidade federativa não pertencer ao país selecionado");
+		
 		this.uf = uf;
 	}
 	
 
 	@Override
 	public String toString() {
-		return "Pedido [email=" + email + ", nome=" + nome + ", sobrenome=" + sobrenome + ", documento=" + documento
+		return "Compra [email=" + email + ", nome=" + nome + ", sobrenome=" + sobrenome + ", documento=" + documento
 				+ ", endereco=" + endereco + ", complemento=" + complemento + ", telefone=" + telefone + ", cep=" + cep
 				+ ", pais=" + pais.getNome() + ", uf=" + uf + "]";
 	}

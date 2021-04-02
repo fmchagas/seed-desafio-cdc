@@ -1,4 +1,4 @@
-package br.com.fmchagas.desafiocdc.pedido;
+package br.com.fmchagas.desafiocdc.compra;
 
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
@@ -10,12 +10,13 @@ import org.hibernate.validator.internal.constraintvalidators.hv.br.CNPJValidator
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 import org.springframework.util.Assert;
 
+import br.com.fmchagas.desafiocdc.compra.pedido.NovoPedidoRequest;
 import br.com.fmchagas.desafiocdc.enderecamento.pais.Pais;
 import br.com.fmchagas.desafiocdc.enderecamento.uf.UnidadeFederativa;
 import br.com.fmchagas.desafiocdc.validation.ExistsId;
 
 //total carga: 4
-public class PedidoRequest {
+public class NovaCompraRequest {
 	@Email @NotBlank
 	private String email;
 	
@@ -50,13 +51,13 @@ public class PedidoRequest {
 	private String telefone;
 	
 	//1
-	@Valid
-	private CarinhoRequest carrinho;
+	@Valid @NotNull
+	private NovoPedidoRequest pedido;
 
-	public PedidoRequest(@Email @NotBlank String email, @NotBlank String nome, @NotBlank String sobrenome,
+	public NovaCompraRequest(@Email @NotBlank String email, @NotBlank String nome, @NotBlank String sobrenome,
 			@NotBlank String documento, @NotBlank String endereco, @NotBlank String complemento,
 			@NotBlank String cidade, @NotNull Long paisId, Long ufId, @NotBlank String cep,
-			@NotBlank String telefone, @Valid CarinhoRequest carrinho) {
+			@NotBlank String telefone, @Valid @NotNull NovoPedidoRequest pedido) {
 		super();
 		this.email = email;
 		this.nome = nome;
@@ -69,7 +70,7 @@ public class PedidoRequest {
 		this.ufId = ufId;
 		this.cep = cep;
 		this.telefone = telefone;
-		this.carrinho = carrinho;
+		this.pedido = pedido;
 	}
 
 	public boolean documentoValido() {
@@ -85,22 +86,26 @@ public class PedidoRequest {
 	}
 	
 	//1
-	public Pedido toModel(EntityManager manager) {
+	public Compra toModel(EntityManager manager) {
 		//1
 		@NotNull Pais pais = manager.find(Pais.class, paisId);
 		
-		Pedido pedido = new Pedido(email,nome,sobrenome,documento,endereco,complemento,telefone,cep,pais);
+		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, telefone, cep, pais);
 		
 		//1
 		if(ufId != null) {
-			pedido.setUf(manager.find(UnidadeFederativa.class, ufId));
+			compra.setUf(manager.find(UnidadeFederativa.class, ufId));
 		}
 		
-		return pedido;
+		return compra;
 	}
 	
-	public CarinhoRequest getCarrinho() {
-		return carrinho;
+	public boolean temUf() {
+		return ufId != null;
+	}
+	
+	public NovoPedidoRequest getCarrinho() {
+		return pedido;
 	}
 
 	public Long getPaisId() {
@@ -117,13 +122,9 @@ public class PedidoRequest {
 
 	@Override
 	public String toString() {
-		return "PedidoRequest [email=" + email + ", nome=" + nome + ", sobrenome=" + sobrenome + ", documento="
+		return "NovaCompraRequest [email=" + email + ", nome=" + nome + ", sobrenome=" + sobrenome + ", documento="
 				+ documento + ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade
-				+ ", paisId=" + paisId + ", ufId=" + ufId + ", cep=" + cep + ", telefone=" + telefone + ", carrinho="
-				+ carrinho + "]";
-	}
-
-	public boolean temUf() {
-		return ufId != null;
+				+ ", paisId=" + paisId + ", ufId=" + ufId + ", cep=" + cep + ", telefone=" + telefone + ", pedido="
+				+ pedido + "]";
 	}
 }

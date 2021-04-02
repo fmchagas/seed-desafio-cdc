@@ -1,4 +1,4 @@
-package br.com.fmchagas.desafiocdc.pedido;
+package br.com.fmchagas.desafiocdc.compra.pedido;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-public class CarinhoRequest {
+public class NovoPedidoRequest {
 	@Positive
 	@NotNull
 	private BigDecimal total;
@@ -18,7 +18,7 @@ public class CarinhoRequest {
 	@Valid
 	private List<ItemPedidoRequest> itens = new ArrayList<>();
 	
-	public CarinhoRequest(@Positive @NotNull BigDecimal total, 
+	public NovoPedidoRequest(@Positive @NotNull BigDecimal total, 
 			@Size(min = 1) @Valid List<ItemPedidoRequest> itens) {
 		super();
 		this.total = total;
@@ -31,6 +31,6 @@ public class CarinhoRequest {
 
 	@Override
 	public String toString() {
-		return "CarinhoRequest [total=" + total + ", itens=" + itens + "]";
+		return "NovoPedidoRequest [total=" + total + ", itens=" + itens + "]";
 	}
 }

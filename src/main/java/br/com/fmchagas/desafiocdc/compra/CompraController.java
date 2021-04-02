@@ -1,4 +1,4 @@
-package br.com.fmchagas.desafiocdc.pedido;
+package br.com.fmchagas.desafiocdc.compra;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/pedidos")
+@RequestMapping("api/v1/compras")
 //total carga: 5
-public class PedidoController {
+public class CompraController {
 	@PersistenceContext
 	private EntityManager manager;
 	
@@ -25,7 +25,7 @@ public class PedidoController {
 	//1
 	private PaisTemUfValidator paisTemUfValidator;
 	
-	public PedidoController(VerificaDocumentoCpfOuCnpjValidator verificaDocumentoCpfOuCnpjValidator,
+	public CompraController(VerificaDocumentoCpfOuCnpjValidator verificaDocumentoCpfOuCnpjValidator,
 			UfPertenceAPaisValidator estadoPertenceAPaisValidator, PaisTemUfValidator paisTemUfValidator) {
 		this.verificaDocumentoCpfOuCnpjValidator = verificaDocumentoCpfOuCnpjValidator;
 		this.estadoPertenceAPaisValidator = estadoPertenceAPaisValidator;
@@ -39,8 +39,8 @@ public class PedidoController {
 	
 	@PostMapping
 	//1
-	public String novo(@Valid @RequestBody PedidoRequest request) {
-		Pedido novoPedido = request.toModel(manager);
+	public String novo(@Valid @RequestBody NovaCompraRequest request) {
+		Compra novaCompra = request.toModel(manager);
 		
 		return request.toString();
 	}

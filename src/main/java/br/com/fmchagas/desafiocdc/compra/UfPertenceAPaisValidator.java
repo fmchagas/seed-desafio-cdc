@@ -1,4 +1,4 @@
-package br.com.fmchagas.desafiocdc.pedido;
+package br.com.fmchagas.desafiocdc.compra;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,7 +19,7 @@ public class UfPertenceAPaisValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return PedidoRequest.class.isAssignableFrom(clazz);
+		return NovaCompraRequest.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class UfPertenceAPaisValidator implements Validator {
 		if (errors.hasErrors()) return;
 		
 		//1
-		PedidoRequest request = (PedidoRequest) target;
+		NovaCompraRequest request = (NovaCompraRequest) target;
 		
 		//1
 		if (request.temUf()) {

@@ -1,4 +1,4 @@
-package br.com.fmchagas.desafiocdc.pedido;
+package br.com.fmchagas.desafiocdc.compra;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class PaisTemUfValidator implements Validator{
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return PedidoRequest.class.isAssignableFrom(clazz);
+		return NovaCompraRequest.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class PaisTemUfValidator implements Validator{
 		if(errors.hasErrors()) return;
 		
 		//1
-		PedidoRequest request = (PedidoRequest) target;
+		NovaCompraRequest request = (NovaCompraRequest) target;
 		
 		Query query = manager.createQuery("select 1 from br.com.fmchagas.desafiocdc.enderecamento.uf.UnidadeFederativa where pais_id = :id");
 		query.setParameter("id", request.getPaisId());

@@ -1,4 +1,4 @@
-package br.com.fmchagas.desafiocdc.pedido;
+package br.com.fmchagas.desafiocdc.compra.pedido;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -14,9 +14,7 @@ public class ItemPedidoRequest {
 	@Positive
 	private Integer quantidade;
 	
-	public ItemPedidoRequest(@NotNull Long livroId, 
-			@Positive Integer quantidade) {
-		super();
+	public ItemPedidoRequest(@NotNull Long livroId, @Positive Integer quantidade) {
 		this.livroId = livroId;
 		this.quantidade = quantidade;
 	}
