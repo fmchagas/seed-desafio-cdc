@@ -2,6 +2,7 @@ package br.com.fmchagas.desafiocdc.compra;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.web.bind.WebDataBinder;
@@ -34,10 +35,12 @@ public class CompraController {
 	}
 	
 	@PostMapping
+	@Transactional
 	//1
 	public String novo(@Valid @RequestBody NovaCompraRequest request) {
 		Compra novaCompra = request.toModel(manager);
+		manager.persist(novaCompra);
 		
-		return request.toString();
+		return novaCompra.toString();
 	}
 }

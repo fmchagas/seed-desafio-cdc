@@ -1,5 +1,7 @@
 package br.com.fmchagas.desafiocdc.compra;
 
+import java.util.function.Function;
+
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -11,6 +13,7 @@ import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 import org.springframework.util.Assert;
 
 import br.com.fmchagas.desafiocdc.compra.pedido.NovoPedidoRequest;
+import br.com.fmchagas.desafiocdc.compra.pedido.Pedido;
 import br.com.fmchagas.desafiocdc.enderecamento.pais.Pais;
 import br.com.fmchagas.desafiocdc.enderecamento.uf.UnidadeFederativa;
 import br.com.fmchagas.desafiocdc.validation.CpfOrCnpj;
@@ -91,7 +94,12 @@ public class NovaCompraRequest {
 		//1
 		@NotNull Pais pais = manager.find(Pais.class, paisId);
 		
-		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, telefone, cep, pais);
+		//uma Compra não deve ser gerada sem um Pedido, mas
+		//um Pedido não da para ser gerado sem uma Compra
+		// com resolver? retardar a criação do pedido, até a compra ser criada -> Lazy evaluation
+		Function<Compra, Pedido> funcaoCriaPedido = pedido.toModel(manager);
+		
+		Compra compra = new Compra(email, nome, sobrenome, documento, endereco, complemento, telefone, cep, pais, funcaoCriaPedido);
 		
 		//1
 		if(ufId != null) {
@@ -119,13 +127,5 @@ public class NovaCompraRequest {
 	
 	public Long getUfId() {
 		return ufId;
-	}
-
-	@Override
-	public String toString() {
-		return "NovaCompraRequest [email=" + email + ", nome=" + nome + ", sobrenome=" + sobrenome + ", documento="
-				+ documento + ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade
-				+ ", paisId=" + paisId + ", ufId=" + ufId + ", cep=" + cep + ", telefone=" + telefone + ", pedido="
-				+ pedido + "]";
 	}
 }
