@@ -1,8 +1,10 @@
 package br.com.fmchagas.desafiocdc.compra;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.util.Assert;
 
 import br.com.fmchagas.desafiocdc.compra.pedido.Pedido;
+import br.com.fmchagas.desafiocdc.cupom_desconto.CupomDesconto;
 import br.com.fmchagas.desafiocdc.enderecamento.pais.Pais;
 import br.com.fmchagas.desafiocdc.enderecamento.uf.UnidadeFederativa;
 
@@ -26,6 +29,7 @@ public class Compra {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Id Long id;
+	
 	private @Email @NotBlank String email;
 	private @NotBlank String nome;
 	private @NotBlank String sobrenome;
@@ -34,6 +38,7 @@ public class Compra {
 	private @NotBlank String complemento;
 	private @NotBlank String telefone;
 	private @NotBlank String cep;
+	private @Embedded CupomAplicado cupomAplicado;
 	
 	@ManyToOne //1
 	private @NotNull Pais pais;
@@ -68,11 +73,70 @@ public class Compra {
 		
 		this.uf = uf;
 	}
+	
+	public void setCupomDesconto(CupomDesconto cupomDesconto) {
+		Assert.isTrue(cupomDesconto.valido(), "Ops, o cupom de desconto aplicado não está valido");
+		Assert.isNull(cupomAplicado, "Ops, não podemos associar um cupom de desconto enquanto nulo");
+		
+		this.cupomAplicado = new CupomAplicado(cupomDesconto);
+	}
 
 	@Override
 	public String toString() {
 		return "Compra [id=" + id + ", email=" + email + ", nome=" + nome + ", sobrenome=" + sobrenome + ", documento="
 				+ documento + ", endereco=" + endereco + ", complemento=" + complemento + ", telefone=" + telefone
 				+ ", cep=" + cep + ", pais=" + pais + ", uf=" + uf + ", pedido=" + pedido + "]";
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public String getDocumento() {
+		return documento;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public CupomAplicado getCupomAplicado() {
+		return cupomAplicado;
+	}
+	
+	public boolean isCupomAplicado() {
+		return getCupomAplicado() != null;
+	}
+
+	public Pais getPais() {
+		return pais;
+	}
+
+	public UnidadeFederativa getUf() {
+		return uf;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
 	}
 }

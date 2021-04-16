@@ -47,6 +47,12 @@ public class Pedido {
 
 		return totalCalcluladoPedido.compareTo(total) == 0;
 	}
+	
+	public BigDecimal totalCalcluladoPedido() {
+		return itens.stream()
+				.map(ItemPedido::total)
+				.reduce(BigDecimal.ZERO, (atual, proximo)->atual.add(proximo));
+	}
 
 	@Override
 	public String toString() {
