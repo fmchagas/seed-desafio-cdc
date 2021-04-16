@@ -1,5 +1,6 @@
 package br.com.fmchagas.desafiocdc.cupom_desconto;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -18,20 +19,32 @@ public class CupomDesconto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private @NotBlank String codigo;
 	@Column(name = "desc_porcentagem")
-	private @NotNull @Positive @Max(100) Integer descontoEmPorcentagem;
+	private @NotNull @Positive @Max(100) BigDecimal descontoEmPorcentagem;
 	@Column(name = "valido_ate")
 	private @NotNull @Future LocalDateTime validade;
 	
+	/**
+	 * @Deprecated Usado apenas pelo hibernate
+	 */
 	@Deprecated
 	public CupomDesconto() {}
 	
-	public CupomDesconto(@NotBlank String codigo, @NotNull @Positive @Max(100) Integer descontoEmPorcentagem,
+	public CupomDesconto(@NotBlank String codigo, @NotNull @Positive @Max(100) BigDecimal descontoEmPorcentagem,
 			@NotNull @Future LocalDateTime validade) {
 				this.codigo = codigo;
 				this.descontoEmPorcentagem = descontoEmPorcentagem;
 				this.validade = validade;
+	}
+	
+	public boolean valido() {
+		return LocalDateTime.now().compareTo(validade) <= 0;
+	}
+	
+	public boolean invalido() {
+		return !valido();
 	}
 	
 	public Long getId() {
@@ -42,7 +55,7 @@ public class CupomDesconto {
 		return codigo;
 	}
 	
-	public Integer getDescontoEmPorcentagem() {
+	public BigDecimal getDescontoEmPorcentagem() {
 		return descontoEmPorcentagem;
 	}
 	

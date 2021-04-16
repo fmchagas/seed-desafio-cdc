@@ -1,5 +1,6 @@
 package br.com.fmchagas.desafiocdc.cupom_desconto;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.validation.constraints.Future;
@@ -16,12 +17,12 @@ public class NovoCupomDescontoRequest {
 	private String codigo;
 	
 	@NotNull @Positive @Max(value = 100)
-	private Integer descontoEmPorcentagem;
+	private BigDecimal descontoEmPorcentagem;
 	
 	@NotNull @Future
 	private LocalDateTime validade;
 
-	public NovoCupomDescontoRequest(@NotBlank String codigo, @NotNull @Positive @Max(100) Integer descontoEmPorcentagem,
+	public NovoCupomDescontoRequest(@NotBlank String codigo, @NotNull @Positive @Max(100) BigDecimal descontoEmPorcentagem,
 			@NotNull @Future LocalDateTime validade) {
 		this.codigo = codigo;
 		this.descontoEmPorcentagem = descontoEmPorcentagem;

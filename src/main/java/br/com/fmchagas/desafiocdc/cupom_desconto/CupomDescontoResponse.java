@@ -1,5 +1,6 @@
 package br.com.fmchagas.desafiocdc.cupom_desconto;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +15,7 @@ public class CupomDescontoResponse {
 	
 	private Long id;
 	private String codigo;
-	private Integer desconto;
+	private BigDecimal desconto;
 	private LocalDateTime validade;
 	
 	public Long getId() {
@@ -23,7 +24,7 @@ public class CupomDescontoResponse {
 	public String getCodigo() {
 		return codigo;
 	}
-	public Integer getDescontoDe() {
+	public BigDecimal getDescontoDe() {
 		return desconto;
 	}
 	public String getValidoAte() {
