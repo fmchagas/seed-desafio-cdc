@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import br.com.fmchagas.desafiocdc.validation.UniqueValue;
 
 //1
-public class AutorForm {
+public class AutorRequest {
 	
 	@NotEmpty private String nome;
 	
@@ -18,7 +18,7 @@ public class AutorForm {
 	
 	
 
-	public AutorForm(@NotEmpty String nome, @Email @NotEmpty String email,
+	public AutorRequest(@NotEmpty String nome, @Email @NotEmpty String email,
 			@NotEmpty @Size(max = 400) String descricao) {
 		super();
 		this.nome = nome;

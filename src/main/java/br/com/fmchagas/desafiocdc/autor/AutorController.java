@@ -35,13 +35,11 @@ public final class AutorController {
 
 	@PostMapping
 	//1
-	public ResponseEntity<?> novo(@Valid @RequestBody AutorForm request) {
+	public ResponseEntity<?> novo(@Valid @RequestBody AutorRequest request) {
 		//1
-		Autor autor = request.toModel();
+		final Autor autorCadastrado = autorRepository.save(request.toModel());
 
-		autor = autorRepository.save(autor);
-
-		return new ResponseEntity<>(autor.toString(), HttpStatus.CREATED);
+		return new ResponseEntity<>(autorCadastrado.toString(), HttpStatus.CREATED);
 	}
 
 }
