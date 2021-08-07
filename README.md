@@ -38,7 +38,7 @@ Para executar o projeto, será necessário instalar os seguintes programas:
 ```
 
 faça uma requisição para:
-http://localhost:8080/api/v1/autores
+http://localhost:8080/cdc/api/v1/autores
 
 ```shell
 	{
