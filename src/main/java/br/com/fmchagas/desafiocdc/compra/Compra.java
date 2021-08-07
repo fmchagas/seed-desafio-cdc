@@ -1,6 +1,5 @@
 package br.com.fmchagas.desafiocdc.compra;
 
-import java.util.Optional;
 import java.util.function.Function;
 
 import javax.persistence.CascadeType;
