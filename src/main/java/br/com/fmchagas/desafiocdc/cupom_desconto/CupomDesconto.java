@@ -14,6 +14,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+import org.springframework.util.Assert;
+
+
 @Entity
 public class CupomDesconto {
 	@Id
@@ -23,6 +26,7 @@ public class CupomDesconto {
 	private @NotBlank String codigo;
 	@Column(name = "desc_porcentagem")
 	private @NotNull @Positive @Max(100) BigDecimal descontoEmPorcentagem;
+
 	@Column(name = "valido_ate")
 	private @NotNull @Future LocalDateTime validade;
 	
@@ -32,11 +36,14 @@ public class CupomDesconto {
 	@Deprecated
 	public CupomDesconto() {}
 	
-	public CupomDesconto(@NotBlank String codigo, @NotNull @Positive @Max(100) BigDecimal descontoEmPorcentagem,
+	public CupomDesconto(@NotBlank String codigo, 
+			@NotNull @Positive @Max(100) BigDecimal descontoEmPorcentagem,
 			@NotNull @Future LocalDateTime validade) {
-				this.codigo = codigo;
-				this.descontoEmPorcentagem = descontoEmPorcentagem;
-				this.validade = validade;
+			Assert.isTrue(validade.compareTo(LocalDateTime.now()) >= 0, "A validade tem que ser no futuro");
+			
+			this.codigo = codigo;
+			this.descontoEmPorcentagem = descontoEmPorcentagem;
+			this.validade = validade;
 	}
 	
 	public boolean valido() {
