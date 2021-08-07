@@ -10,6 +10,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.util.Assert;
+
 import br.com.fmchagas.desafiocdc.autor.Autor;
 import br.com.fmchagas.desafiocdc.categoria.Categoria;
 import br.com.fmchagas.desafiocdc.validation.ExistsId;
@@ -61,9 +63,11 @@ public class LivroRequest {
 	public Livro toModel(EntityManager manager){
 		//1
 		@NotNull Autor autor = manager.find(Autor.class, autorId);
-		
 		//1
 		@NotNull Categoria categoria = manager.find(Categoria.class, categoriaId);
+		//Self testing
+		Assert.state(autor!=null, "Não podemos cadastrar um livro sem autor");
+		Assert.state(categoria!=null, "Não podemos cadastrar um livro sem categoria");
 		
 		return new Livro(titulo,resumo,
 				sumario, preco, 
