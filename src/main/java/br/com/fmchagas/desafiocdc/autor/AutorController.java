@@ -11,27 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "api/v1/autores",
+@RequestMapping(path = "/api/v1/autores",
 		consumes = MediaType.APPLICATION_JSON_VALUE,
 		produces = MediaType.APPLICATION_JSON_VALUE)
 //Carga total: 3
 public final class AutorController {
 	//1
 	private AutorRepository autorRepository;
-	//1
-	//private AutorComEmailDuplicadoValidator autorComEmailDuplicadoValidator;
 
 	public AutorController(AutorRepository autorRepository) {
 		this.autorRepository = autorRepository;
-		//this.autorComEmailDuplicadoValidator = autorComEmailDuplicadoValidator;
 	}
 	
-	
-	//@InitBinder
-	/*
-	 * public void init(WebDataBinder binder) {
-	 * binder.addValidators(autorComEmailDuplicadoValidator); }
-	 */
 
 	@PostMapping
 	//1

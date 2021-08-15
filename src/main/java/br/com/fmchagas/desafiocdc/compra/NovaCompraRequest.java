@@ -1,5 +1,6 @@
 package br.com.fmchagas.desafiocdc.compra;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 import javax.persistence.EntityManager;
@@ -129,7 +130,8 @@ public class NovaCompraRequest {
 	}
 
 	public boolean temUf() {
-		return ufId != null;
+		return Optional.ofNullable(ufId).isPresent();
+		//return ufId != null;
 	}
 
 	public NovoPedidoRequest getCarrinho() {
