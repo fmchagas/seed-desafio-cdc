@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 //Carga total: 3
 public final class AutorController {
 	//1
-	private AutorRepository autorRepository;
+	private AutorUseCase autorUseCase;
 
-	public AutorController(AutorRepository autorRepository) {
-		this.autorRepository = autorRepository;
+	public AutorController(AutorUseCase autorUseCase) {
+		this.autorUseCase = autorUseCase;
 	}
 	
 
 	@PostMapping
 	//1
-	public ResponseEntity<?> novo(@Valid @RequestBody AutorRequest request) {
+	public ResponseEntity<?> novo(@Valid @RequestBody AutorRequestImpl request) {
 		//1
-		final Autor autorCadastrado = autorRepository.save(request.toModel());
-
-		return new ResponseEntity<>(autorCadastrado.toString(), HttpStatus.CREATED);
+		ResponseRequest autorResposne = new ResponseRequest(autorUseCase.execute(request));
+		
+		return new ResponseEntity<>(autorResposne, HttpStatus.CREATED);
 	}
 
 }

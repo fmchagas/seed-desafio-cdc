@@ -19,7 +19,7 @@ public class AutorComEmailDuplicadoValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> clazz) {
 		//1
-		return AutorRequest.class.isAssignableFrom(clazz);
+		return AutorRequestImpl.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class AutorComEmailDuplicadoValidator implements Validator {
 		if (errors.hasErrors())
 			return;
 
-		AutorRequest request = (AutorRequest) target;
+			AutorRequestImpl request = (AutorRequestImpl) target;
 		Optional<Autor> podeTerAutor = autorRepository.findByEmail(request.getEmail());
 		
 		//1
